@@ -13,45 +13,49 @@
         android:layout_gravity="center"
         android:src="@drawable/icone">
     </ImageView>
+
     <TextView
         android:id="@+id/location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:gravity="center"
-        android:padding="15dp"
-        android:text="Current Location"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        >
-    </TextView>
-
-
-    <TextView
-        android:id="@+id/Latitude"
-        android:layout_width="match_parent"
+        android:layout_width="357dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:gravity="center"
-        android:hint="Latitude"
         android:padding="15dp"
+        android:text="Welcome to your location app 😎 "
+        android:textColor="@color/pColor"
         android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold">
+    </TextView>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="center"
+        android:hint="To save the current locations you've visited click  the button 'Save location'  "
+        android:padding="15dp"
+        android:textColor="@color/pColor"
+        android:textSize="15dp"
         android:textStyle="bold">
     </TextView>
     <TextView
-        android:id="@+id/Longitude"
-        android:layout_width="match_parent"
+        android:id="@+id/description2"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:gravity="center"
-        android:hint="Longitude"
-        android:padding="7dp"
-        android:textSize="20dp"
+        android:hint="To see all the locations you've visited click  the button 'Show all locations'  "
+        android:padding="15dp"
+        android:textColor="@color/pColor"
+        android:textSize="15dp"
         android:textStyle="bold">
     </TextView>
     <Button

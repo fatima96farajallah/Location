@@ -2,19 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/icon"-->
-<!--        android:layout_width="43dp"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:paddingLeft="8dp">-->
 
-<!--    </ImageView>-->
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="142dp"
+            android:paddingLeft="8dp"
+            android:src="@drawable/location" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="50dp"
             android:baselineAligned="false"
@@ -30,8 +35,15 @@
             android:id="@+id/subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="data of vist">
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="162dp"
+            android:layout_marginRight="162dp"
+            android:text="locations visited">
 
         </TextView>
 

@@ -66,4 +66,14 @@ public class LocationsDB extends SQLiteOpenHelper {
         db.delete(TABLE_NAME,"",null);
     }
 
+    public void updateData(){
+        ContentValues contentValues = new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(TABLE_NAME ,contentValues, "_id"+COLUMN_Id,null);
+    }
+    public void deleteRecordID(int id){
+        String query = "DELETE FROM "+ TABLE_NAME +" WHERE " + COLUMN_Id +" = "+id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query);
+    }
 }
