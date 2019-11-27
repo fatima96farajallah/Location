@@ -25,8 +25,9 @@ public class LocationsAdapter extends ArrayAdapter<Location> {
         }
         TextView titleText = (TextView) viewContect.findViewById(R.id.title);
         TextView subtitleText = (TextView) viewContect.findViewById(R.id.subtitle);
-        titleText.setText(" Latitude = "+location.getLatitude() +" , " +"Longitude = "+ location.getLongitude());
+        titleText.setText(" Latitude = "+location.getLatitude() +" , " +"Longitude = "+ location.getLongitude()+" , "+"id = "+location.getId());
         subtitleText.setText("location visited" + location.getCreateAt());
+
         return viewContect;
     }
 }

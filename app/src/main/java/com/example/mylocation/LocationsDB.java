@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 public class LocationsDB extends SQLiteOpenHelper {
     //Database version
@@ -21,8 +24,6 @@ public class LocationsDB extends SQLiteOpenHelper {
     private static final String COLUMN_UpdateAt = "UpdateAt";
     private static final String COLUMN_Longitude = "Longitude";
     private static final String COLUMN_Latitude = "Latitude";
-
-
 
     public LocationsDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -43,7 +44,6 @@ public class LocationsDB extends SQLiteOpenHelper {
 
     //insert data to database.
     public void insertData(double Longitude, double Latitude){
-
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_CreateAt, "");
         contentValues.put(COLUMN_UpdateAt,"");
@@ -63,17 +63,29 @@ public class LocationsDB extends SQLiteOpenHelper {
     //delete all data from database.
     public void deleteData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME,"",null);
+        db.delete(TABLE_NAME,"",null );
     }
+public void deleteItem(int id){
+    SQLiteDatabase sqLiteDB = this.getWritableDatabase();
 
-    public void updateData(){
-        ContentValues contentValues = new ContentValues();
+    String query = "DELETE FROM " + TABLE_NAME + " WHERE "
+            + COLUMN_Id + " = '" + id + "'";
+    sqLiteDB.execSQL(query);
+}
+    public Cursor getItemID(String Longitude, String Latitude ){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.update(TABLE_NAME ,contentValues, "_id"+COLUMN_Id,null);
+        String query = "SELECT " + COLUMN_Id + " FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_Longitude+ " = '" +Longitude + "'" + "AND" +COLUMN_Latitude+ "= '"+ Latitude+">";
+        Cursor data = db.rawQuery(query, null);
+        return data;
     }
-    public void deleteRecordID(int id){
-        String query = "DELETE FROM "+ TABLE_NAME +" WHERE " + COLUMN_Id +" = "+id;
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(query);
+public void updateData(String id,String Longitude, String Latitude){
+    SQLiteDatabase sqLiteDB = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(COLUMN_CreateAt, "");
+    contentValues.put(COLUMN_UpdateAt,"");
+    contentValues.put(COLUMN_Longitude,Longitude);
+    contentValues.put(COLUMN_Latitude,Latitude);
+    sqLiteDB.update(TABLE_NAME,contentValues,"id = ?",new String[] {id});
     }
 }

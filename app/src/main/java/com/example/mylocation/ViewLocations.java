@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class ViewLocations extends AppCompatActivity {
     private LocationsAdapter locationsAdapter ;
     ArrayList<Location> locations;
     ListView listView;
+    private int SelectedID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +29,9 @@ public class ViewLocations extends AppCompatActivity {
         locations = new ArrayList<Location>();
         db = new LocationsDB(listView.getContext());
         locations = getLocations();
+        SelectedID=locations.indexOf(0);
         locationsAdapter = new LocationsAdapter(this,locations);
         listView.setAdapter(locationsAdapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> parent, View view, final int position, final long id) {
@@ -41,6 +43,7 @@ public class ViewLocations extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         locations.remove(positionToRemove);
+                        db.deleteItem(SelectedID);
                         locationsAdapter.notifyDataSetChanged();
                     }
                 });
