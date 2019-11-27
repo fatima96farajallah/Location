@@ -14,11 +14,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -70,29 +70,39 @@ public class MainActivity extends AppCompatActivity  implements LocationListener
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(android.location.Location location) {
         Longi=location.getLongitude();
         Lati=location.getLatitude();
         savelocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 db.insertData(Longi,Lati);
-                Toast.makeText(MainActivity.this, "Location is saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Location_ is saved", Toast.LENGTH_SHORT).show();
             }
         });
+        ArrayList<Location_> locations = new ArrayList<Location_>();
+        locations = getLocations();
+        double x;
+        double y;
+        for (int i = 0; i < locations.size(); i++) {
+            x = Math.abs(location.getLatitude() - locations.get(i).Latitude);
+            y = Math.abs(location.getLongitude() - locations.get(i).Longitude);
+            if (x > 0 && x < 5 && y > 0 && y < 5) {
+                Log.d("notification", "Create notification");
+                showNotification("Location","You have visited this location before","Location");
+            }
+        }
     }
-
-    public ArrayList<com.example.mylocation.Location> getLocations() {
-        com.example.mylocation.Location loc;
-        ArrayList<com.example.mylocation.Location> locationsList = new ArrayList<com.example.mylocation.Location>();
+    public ArrayList<Location_> getLocations() {
+        ArrayList<Location_> locationsList = new ArrayList<Location_>();
         Cursor cursor = db.getAllData();
         while (cursor.moveToNext()) {
-            locationsList.add(new com.example.mylocation.Location(
+            locationsList.add(new Location_(
                     cursor.getInt(0),
                     cursor.getString(1),
-                    cursor.getString(2)
-                    , cursor.getDouble(3)
-                    , cursor.getDouble(4)
+                    cursor.getString(2),
+                    cursor.getDouble(3),
+                    cursor.getDouble(4)
             ));
         }
         return locationsList;

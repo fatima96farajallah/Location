@@ -9,16 +9,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class ViewLocations extends AppCompatActivity {
     private LocationsDB db;
     private LocationsAdapter locationsAdapter ;
-    ArrayList<Location> locations;
+    ArrayList<Location_> locations;
     ListView listView;
     private int SelectedID;
     @Override
@@ -26,7 +24,7 @@ public class ViewLocations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listviwe);
         listView = (ListView)findViewById(R.id.list);
-        locations = new ArrayList<Location>();
+        locations = new ArrayList<Location_>();
         db = new LocationsDB(listView.getContext());
         locations = getLocations();
         SelectedID=locations.indexOf(0);
@@ -43,7 +41,7 @@ public class ViewLocations extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         locations.remove(positionToRemove);
-                        db.deleteItem(SelectedID);
+                        db.deleteLocation(locations.get(position).getId());
                         locationsAdapter.notifyDataSetChanged();
                     }
                 });
@@ -61,11 +59,11 @@ public class ViewLocations extends AppCompatActivity {
             }
         });
     }
-    public ArrayList<Location> getLocations() {
-        ArrayList<Location> locationsList = new ArrayList<Location>();
+    public ArrayList<Location_> getLocations() {
+        ArrayList<Location_> locationsList = new ArrayList<Location_>();
         Cursor cursor = db.getAllData();
         while (cursor.moveToNext()) {
-            locationsList.add(new Location(
+            locationsList.add(new Location_(
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2)

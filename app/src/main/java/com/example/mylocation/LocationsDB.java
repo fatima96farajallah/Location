@@ -14,7 +14,7 @@ public class LocationsDB extends SQLiteOpenHelper {
     private static final int   DATABASE_VERSION = 1;
 
     //Database name
-    private static final String DATABASE_NAME = "Locations.db";
+    private static final String DATABASE_NAME = "locations.db";
 
     //Table name
     private static final String TABLE_NAME = "visited_locations";
@@ -65,13 +65,12 @@ public class LocationsDB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME,"",null );
     }
-public void deleteItem(int id){
-    SQLiteDatabase sqLiteDB = this.getWritableDatabase();
 
-    String query = "DELETE FROM " + TABLE_NAME + " WHERE "
-            + COLUMN_Id + " = '" + id + "'";
-    sqLiteDB.execSQL(query);
-}
+    public  void deleteLocation(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_Id + " = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
     public Cursor getItemID(String Longitude, String Latitude ){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COLUMN_Id + " FROM " + TABLE_NAME +
@@ -79,13 +78,12 @@ public void deleteItem(int id){
         Cursor data = db.rawQuery(query, null);
         return data;
     }
-public void updateData(String id,String Longitude, String Latitude){
-    SQLiteDatabase sqLiteDB = this.getWritableDatabase();
-    ContentValues contentValues = new ContentValues();
-    contentValues.put(COLUMN_CreateAt, "");
-    contentValues.put(COLUMN_UpdateAt,"");
-    contentValues.put(COLUMN_Longitude,Longitude);
-    contentValues.put(COLUMN_Latitude,Latitude);
-    sqLiteDB.update(TABLE_NAME,contentValues,"id = ?",new String[] {id});
+    public void updateData(int id,String Longitude, String Latitude){
+        SQLiteDatabase sqLiteDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_UpdateAt,"");
+        contentValues.put(COLUMN_Longitude,Longitude);
+        contentValues.put(COLUMN_Latitude,Latitude);
+        sqLiteDB.update(TABLE_NAME,contentValues,"id = ?", new String[]{String.valueOf(id)});
     }
 }

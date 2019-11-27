@@ -2,17 +2,11 @@ package com.example.mylocation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.database.Cursor;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,14 +17,14 @@ public class editlocation extends AppCompatActivity {
     Button update;
     EditText Longitude ,Latitude;
     private LocationsAdapter locationsAdapter ;
-    ArrayList<Location> locations;
+    ArrayList<Location_> locations;
     private int selectedId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        locations = new ArrayList<Location>();
+        locations = new ArrayList<Location_>();
         setContentView(R.layout.activity_editlocation);
         db = new LocationsDB(this);
         locations = getLocations();
@@ -45,17 +39,18 @@ public void UpdateData(){
     update.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-             db.updateData(String.valueOf(selectedId),Longitude.getText().toString(),Latitude.getText().toString());
-                locationsAdapter.notifyDataSetChanged();
-                Toast.makeText(editlocation.this, "Data is update", Toast.LENGTH_SHORT).show();
+            int id = locations.get(0).getId();
+            db.updateData(id,Longitude.getText().toString(),Latitude.getText().toString());
+            locationsAdapter.notifyDataSetChanged();
+            Toast.makeText(editlocation.this, "Data is update", Toast.LENGTH_SHORT).show();
         }
     });
 }
-    public ArrayList<Location> getLocations() {
-        ArrayList<Location> locationsList = new ArrayList<Location>();
+    public ArrayList<Location_> getLocations() {
+        ArrayList<Location_> locationsList = new ArrayList<Location_>();
         Cursor cursor = db.getAllData();
         while (cursor.moveToNext()) {
-            locationsList.add(new Location(
+            locationsList.add(new Location_(
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2)

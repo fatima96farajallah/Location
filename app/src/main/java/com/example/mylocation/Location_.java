@@ -1,6 +1,6 @@
 package com.example.mylocation;
 
-public class Location {
+public class Location_ {
 
     int id;
     String CreateAt;
@@ -8,7 +8,7 @@ public class Location {
     double Longitude;
     double Latitude;
 
-    public Location(int id, String createAt, String updateAt, double longitude, double latitude) {
+    public Location_(int id, String createAt, String updateAt, double longitude, double latitude) {
         this.id = id;
         CreateAt = createAt;
         UpdateAt = updateAt;
@@ -58,7 +58,7 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Locations{" +
+        return "locations{" +
                 "CreateAt='" + CreateAt + '\'' +
                 ", UpdateAt='" + UpdateAt + '\'' +
                 ", Longitude=" + Longitude +
