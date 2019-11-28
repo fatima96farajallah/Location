@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity  implements LocationListener
                 startActivity(viwelocation);
             }
         });
+
         CheckPermission();
     }
     public void onResume() {

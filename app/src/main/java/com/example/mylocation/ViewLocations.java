@@ -18,7 +18,6 @@ public class ViewLocations extends AppCompatActivity {
     private LocationsAdapter locationsAdapter ;
     ArrayList<Location_> locations;
     ListView listView;
-    private int SelectedID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +26,6 @@ public class ViewLocations extends AppCompatActivity {
         locations = new ArrayList<Location_>();
         db = new LocationsDB(listView.getContext());
         locations = getLocations();
-        SelectedID=locations.indexOf(0);
         locationsAdapter = new LocationsAdapter(this,locations);
         listView.setAdapter(locationsAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -40,12 +38,11 @@ public class ViewLocations extends AppCompatActivity {
                 adb.setPositiveButton("Delete", new AlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        locations.remove(positionToRemove);
                         db.deleteLocation(locations.get(position).getId());
+                        locations.remove(positionToRemove);
                         locationsAdapter.notifyDataSetChanged();
                     }
                 });
-
                 adb.setNegativeButton("Update", new AlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

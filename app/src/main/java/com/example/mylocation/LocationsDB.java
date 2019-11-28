@@ -42,12 +42,10 @@ public class LocationsDB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME);
         onCreate(db);
     }
-
-
     //insert data to database.
     public void insertData(double Longitude, double Latitude,String createAt ){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_CreateAt, "createAt");
+        contentValues.put(COLUMN_CreateAt, "");
         contentValues.put(COLUMN_UpdateAt,"");
         contentValues.put(COLUMN_Longitude,Longitude);
         contentValues.put(COLUMN_Latitude,Latitude);
