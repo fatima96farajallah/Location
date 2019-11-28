@@ -6,13 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import java.util.Calendar;
+import java.util.Date;
 
 import static android.content.ContentValues.TAG;
 
 public class LocationsDB extends SQLiteOpenHelper {
     //Database version
     private static final int   DATABASE_VERSION = 1;
-
+    Date currentTime = Calendar.getInstance().getTime();
     //Database name
     private static final String DATABASE_NAME = "locations.db";
 
@@ -43,9 +45,9 @@ public class LocationsDB extends SQLiteOpenHelper {
 
 
     //insert data to database.
-    public void insertData(double Longitude, double Latitude){
+    public void insertData(double Longitude, double Latitude,String createAt ){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_CreateAt, "");
+        contentValues.put(COLUMN_CreateAt, "createAt");
         contentValues.put(COLUMN_UpdateAt,"");
         contentValues.put(COLUMN_Longitude,Longitude);
         contentValues.put(COLUMN_Latitude,Latitude);

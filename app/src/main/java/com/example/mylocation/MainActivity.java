@@ -24,11 +24,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity  implements LocationListener {
     public static double Longi;
     public static double Lati;
+    public static String  time;
     private LocationsDB db;
     private   Button savelocation,showlocation;
     LocationManager locationManager;
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity  implements LocationListener
         savelocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.insertData(Longi,Lati);
+                db.insertData(Longi,Lati,"time");
                 Toast.makeText(MainActivity.this, "Location_ is saved", Toast.LENGTH_SHORT).show();
             }
         });
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity  implements LocationListener
             y = Math.abs(location.getLongitude() - locations.get(i).Longitude);
             if (x > 0 && x < 5 && y > 0 && y < 5) {
                 Log.d("notification", "Create notification");
-                showNotification("Location","You have visited this location before","Location");
+                showNotification("Location","You have visited this location before in "+ Calendar.getInstance().getTime(),"Location");
             }
         }
     }
